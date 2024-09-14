@@ -22,11 +22,11 @@ COMMANDS = {
 }
 
 @app.get("/", response_model=dict[str, str])
-async def root():
+async def get_root_message():
     return {"message": "Welcome to CodeAssistantAPI. Use /help to see available commands."}
 
 @app.get("/help", response_model=dict[str, str])
-async def help():
+async def get_help() -> dict[str, str]:
     return COMMANDS
 
 @app.get("/{command}", response_model=CommandResponse)
@@ -37,7 +37,7 @@ async def get_command_description(command: str):
         raise HTTPException(status_code=404, detail=f"Command '{command}' not found. Use /help to see available commands.")
 
 @app.post("/fix", response_model=FixResponse)
-async def fix_code(request: CodeRequest):
+async def post_fix_code(request: CodeRequest):
     # Implement your code fixing logic here
     # This is a placeholder implementation
     return FixResponse(
@@ -46,7 +46,7 @@ async def fix_code(request: CodeRequest):
     )
 
 @app.post("/review", response_model=ReviewResponse)
-async def review_code(request: CodeRequest):
+async def post_review_code(request: CodeRequest):
     # Implement your code review logic here
     # This is a placeholder implementation
     return ReviewResponse(
