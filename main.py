@@ -17,7 +17,6 @@ class ReviewResponse(BaseModel):
     reviewComments: list[str]
 
 COMMANDS = {
-    "help": "Returns a list of all available commands and their descriptions.",
     "fix": "Accepts a code snippet, identifies errors or issues, provides a corrected version, and explains changes.",
     "review": "Accepts a code snippet, provides feedback on best practices, potential risks, and improvement suggestions."
 }
@@ -35,7 +34,7 @@ async def get_command_description(command: str):
     try:
         return CommandResponse(description=COMMANDS[command])
     except KeyError:
-        return CommandResponse(description=f"Command '{command}' not found. Use /help to see available commands.")
+        raise HTTPException(status_code=404, detail=f"Command '{command}' not found. Use /help to see available commands.")
 
 @app.post("/fix", response_model=FixResponse)
 async def fix_code(request: CodeRequest):
