@@ -8,8 +8,7 @@ This is a **FastAPI** project designed to build RESTful APIs with Python. The ap
 ```
 .
 ├── app/
-│   ├── __init__.py
-│   └── main.py       # Main FastAPI app file
+├── main.py           # Main FastAPI app file
 ├── requirements.txt  # Python dependencies
 ├── Procfile          # Deployment instructions for Railway
 └── README.md         # Project documentation
